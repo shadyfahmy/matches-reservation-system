@@ -1,0 +1,17 @@
+<mat-toolbar color="primary">
+    <div>Egyptian Premier League</div>
+  </mat-toolbar>
+  <mat-tab-group color="primary">
+    <mat-tab *ngIf="user_type == 'admin'" label="Pending Users"> Pending Users </mat-tab>
+    <mat-tab *ngIf="user_type == 'admin'" label="Users List"> Users List </mat-tab>
+    <mat-tab *ngIf="user_type == 'manager'" label="Matches"> Upcoming Matches </mat-tab>
+    <mat-tab *ngIf="user_type == 'manager'" label="Stadiums"> Reservations </mat-tab>
+    <mat-tab *ngIf="user_type == 'fan'" label="Upcoming Matches"> Upcoming Matches </mat-tab>
+    <mat-tab *ngIf="user_type == 'fan'" label="Reservations"> Reservations </mat-tab>
+    <mat-tab *ngIf="user_type == 'fan'" label="Edit Data"> Edit Data </mat-tab>
+  </mat-tab-group>
+<p>profile-page works!</p>
+<h1>BEACH PLEASE</h1>
+<p>feh variable esmo user_type haykon admin aw manager aw fan w 3ala asaso el tabs deh bttghayar 
+    w elmafrood te3mlo components tet7att gowa koll tab.
+</p>
