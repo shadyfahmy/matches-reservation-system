@@ -1,4 +1,4 @@
-package com.search.tickets_reservation_system.entity;
+package com.tickets_reservation_system.entity;
 
 import java.time.LocalDateTime;
 

@@ -1,4 +1,4 @@
-package com.search.tickets_reservation_system.entity;
+package com.tickets_reservation_system.entity;
 
 import lombok.ToString;
 
@@ -7,7 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "queries", schema = "test_search_engine")
 @ToString
 public class Query {
     @Id

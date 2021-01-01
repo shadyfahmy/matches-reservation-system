@@ -1,7 +1,7 @@
 package com.tickets_reservation_system.controller;
 
-import com.search.tickets_reservation_system.entity.History;
-import com.search.tickets_reservation_system.entity.User;
+import com.tickets_reservation_system.entity.History;
+import com.tickets_reservation_system.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @CrossOrigin("*")
 public class ApiController {
-
+    /*
     @Autowired
     JdbcTemplate jdbcTemplate;
 
@@ -97,5 +97,5 @@ public class ApiController {
         int offset = (page - 1)*20;
         return null;
     }
-
+    */
 }
