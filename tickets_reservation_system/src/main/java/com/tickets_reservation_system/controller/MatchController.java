@@ -17,5 +17,21 @@ public class MatchController {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    /*
+    This is an endpoint that doesn't check the header for a token.(Added any similar path to security config)
+     */
+    @ResponseBody
+    @RequestMapping(method = RequestMethod.GET, value = "/test")
+    public void test() {
+        System.out.println("Test");
+    }
 
+    /*
+    This is an endpoint that checks the header for a token.
+    */
+    @ResponseBody
+    @RequestMapping(method = RequestMethod.GET, value = "/test2")
+    public void test2() {
+        System.out.println("Test");
+    }
 }

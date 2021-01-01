@@ -12,7 +12,7 @@ import java.util.function.Function;
 
 public class JwtUtil {
 
-    private String secret = "eplSecretKey";
+    public static final String secret = "eplSecretKey";
 
     public JwtUtil() {}
 
@@ -47,7 +47,7 @@ public class JwtUtil {
                 .signWith(SignatureAlgorithm.HS256, secret).compact();
     }
 
-    private Boolean validateToken(String token, User user) {
+    public Boolean validateToken(String token, User user) {
         final String username = extractUsername(token);
         return (username.equals(user.getUsername()) && !isTokenExpired(token));
     }
