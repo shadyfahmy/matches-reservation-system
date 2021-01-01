@@ -1,4 +1,4 @@
-package com.search.tickets_reservation_system.config;
+package com.tickets_reservation_system.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

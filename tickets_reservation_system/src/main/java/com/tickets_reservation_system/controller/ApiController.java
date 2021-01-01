@@ -1,7 +1,6 @@
 package com.search.tickets_reservation_system.controller;
 
 import com.search.tickets_reservation_system.entity.History;
-import com.search.tickets_reservation_system.entity.Query;
 import com.search.tickets_reservation_system.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
