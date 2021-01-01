@@ -9,7 +9,7 @@ export class RegistrationService {
 
   private host:string = 'http://localhost:8080/api/v1';
 
-  constructor(public http: HttpClient,) { }
+  constructor(public http: HttpClient) { }
 
   // User Registration serivce
   signUp(user: User) {
@@ -19,16 +19,17 @@ export class RegistrationService {
 
     return this.http.post(this.host + "/signup", JSON.stringify(
     {
-      "firstName": user.firstName,
-      "lastName": user.lastName,
-      "dateOfBirth": user.bdate,
+      "firstName": user.fname,
+      "lastName": user.lname,
+      "dateOfBirth": user.dob,
       "username": user.username,
       "gender": user.gender,
-      "email": user.email,
-      "password": user.password,
-      "role": user.role,
+      "email": user.mail,
+      "password": user.pw,
+      "role": user.user_type,
       "address": user.address,
-      "city": user.city
+      "city": user.city,
+      "approved": user.approved
     }), httpOptions);
   }
 
@@ -40,7 +41,7 @@ export class RegistrationService {
     return this.http.post(this.host + "/signin", JSON.stringify(
       {
         "username": user.username,
-        "password": user.password
+        "password": user.pw
       }), httpOptions);
   }
 }
