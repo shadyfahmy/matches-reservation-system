@@ -1,4 +1,4 @@
-package com.search.tickets_reservation_system.controller;
+package com.tickets_reservation_system.controller;
 
 import com.search.tickets_reservation_system.entity.History;
 import com.search.tickets_reservation_system.entity.User;
