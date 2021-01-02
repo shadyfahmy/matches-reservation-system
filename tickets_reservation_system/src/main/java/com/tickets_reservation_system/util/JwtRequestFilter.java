@@ -80,7 +80,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 logger.error(e);
             }
 
-            if (this.jwtUtil.validateToken(authToken, user)) {
+            if (this.jwtUtil.validateToken(authToken)) {
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         user, null, Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN")));
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

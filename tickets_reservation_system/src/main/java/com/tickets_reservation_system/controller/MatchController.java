@@ -1,8 +1,10 @@
 package com.tickets_reservation_system.controller;
 
+import com.tickets_reservation_system.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.ResultSet;
@@ -31,7 +33,13 @@ public class MatchController {
     */
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET, value = "/test2")
-    public void test2() {
+    public void test2()
+    {
+        // Example get authenticated user info.
+        Object user = SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        System.out.println(((User)user).getUsername());
+        System.out.println(((User)user).getMail());
         System.out.println("Test");
     }
 }
