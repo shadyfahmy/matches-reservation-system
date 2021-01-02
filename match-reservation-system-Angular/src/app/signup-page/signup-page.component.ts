@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user';
 import { FormControl, Validators } from '@angular/forms';
+import { RegistrationService } from '../service/registration.service';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-signup-page',
@@ -29,7 +32,9 @@ export class SignupPageComponent implements OnInit {
   passwordFormControl = new FormControl('password', [
     Validators.required
   ]);
-  constructor() { }
+  constructor(private router: Router,
+    public registrationService: RegistrationService,
+    private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.user = new User();
@@ -42,12 +47,24 @@ export class SignupPageComponent implements OnInit {
   }
 
   signUp() {
-    console.log(this.date);
-    const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(this.date);
-    const mo = new Intl.DateTimeFormat('en', { month: 'numeric' }).format(this.date);
-    const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(this.date);
-    console.log(ye,mo,da)
-    console.log(this.user);
+    const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(this.date);
+    const month = new Intl.DateTimeFormat('en', { month: 'numeric' }).format(this.date);
+    const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(this.date);
+    this.user.dob = year + "-" + month + "-" + day;
+    this.registrationService.signUp(this.user).subscribe(() => {
+      this.openSnackBar("Registration completed, wait for admin approval");
+      this.router.navigate(['/home']);
+    }, err => {
+      this.openSnackBar(err.error);
+    });
+  }
+
+  openSnackBar(msg: string) {
+    this._snackBar.open(msg, 'Okay', {
+      duration: 2000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+    });
   }
 
 }
