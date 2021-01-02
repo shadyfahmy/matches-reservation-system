@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from '../models/user';
 import { RegistrationService } from '../service/registration.service';
 import { ActiveAccountService } from '../service/active-account.service';
@@ -13,7 +14,8 @@ export class LoginPageComponent implements OnInit {
 
   user: User;
 
-  constructor(public registrationService: RegistrationService,
+  constructor(private router:Router,
+    public registrationService: RegistrationService,
     private activeAccountService: ActiveAccountService,
     private _snackBar: MatSnackBar) { }
 
@@ -24,16 +26,17 @@ export class LoginPageComponent implements OnInit {
   }
 
   signIn() {
-    console.log(this.user)
     if (this.user.username != '' && this.user.pw != '') {
       this.registrationService.signIn(this.user).subscribe(res => {
-        console.log(res[0]['token'], res[1]['user']);
         this.activeAccountService.setActiveUser(res[0]['token'], res[1]['user']);
+        this.openSnackBar("Welcome !");
       }, err => {
-        console.log(err);
         this.openSnackBar(err.error);
       });
     }
+  }
+  signUp() {
+    this.router.navigate(['/signup']);
   }
 
   openSnackBar(msg: string) {

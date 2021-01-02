@@ -1,0 +1,129 @@
+<mat-toolbar color="primary">
+    <span>Egyptian Premier League</span>
+</mat-toolbar>
+
+<mat-card class="signup-card">
+    <mat-card-header>
+        <div mat-card-avatar class="signup-header-image"></div>
+        <mat-card-title> Sign Up </mat-card-title>
+        <mat-card-subtitle>EPL Account</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <form class="signup-form">
+            <mat-form-field class="signup-input">
+                <mat-label>Username</mat-label>
+                <input matInput type="text" [formControl]="usernameFormControl" name="username"
+                    [(ngModel)]="user.username">
+                <button mat-button *ngIf="user.username" matSuffix mat-icon-button aria-label="Clear"
+                    (click)="user.username=null">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <mat-error *ngIf="usernameFormControl.hasError('required')">
+                    Username is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="signup-input">
+                <mat-label>First name</mat-label>
+                <input matInput type="text" [formControl]="fnameFormControl" name="fname" [(ngModel)]="user.fname">
+                <button mat-button *ngIf="user.fname" matSuffix mat-icon-button aria-label="Clear"
+                    (click)="user.fname=null">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <mat-error *ngIf="fnameFormControl.hasError('required')">
+                    First name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="signup-input">
+                <mat-label>Last name</mat-label>
+                <input matInput type="text" [formControl]="lnameFormControl" name="lname" [(ngModel)]="user.lname">
+                <button mat-button *ngIf="user.lname" matSuffix mat-icon-button aria-label="Clear"
+                    (click)="user.lname=null">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <mat-error *ngIf="lnameFormControl.hasError('required')">
+                    Last name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="signup-input">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" [formControl]="passwordFormControl" name="password"
+                    [(ngModel)]="user.pw">
+                <button mat-button *ngIf="user.pw" matSuffix mat-icon-button aria-label="Clear" (click)="user.pw=null">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <mat-error *ngIf="passwordFormControl.hasError('required')">
+                    Password is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="signup-input">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com"
+                    name="email" [(ngModel)]="user.mail">
+                <button mat-button *ngIf="user.mail" matSuffix mat-icon-button aria-label="Clear"
+                    (click)="user.mail=null">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                    Please enter a valid email address
+                </mat-error>
+                <mat-error *ngIf="emailFormControl.hasError('required')">
+                    Email is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+        </form>
+
+        <p> Gender </p>
+        <mat-radio-group aria-label="Gender" [(ngModel)]="user.gender">
+            <mat-radio-button value="Male">Male</mat-radio-button>
+            <mat-radio-button value="Female">Female</mat-radio-button>
+        </mat-radio-group>
+
+        <mat-form-field style="margin-left: 10px;">
+            <mat-label>Select a city</mat-label>
+            <mat-select [(value)]="user.city">
+                <mat-option value="Giza">Giza</mat-option>
+                <mat-option value="Cairo">Cairo</mat-option>
+                <mat-option value="Alexandria">Alexandria</mat-option>
+                <mat-option value="Faiyum">Faiyum</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="signup-input">
+            <mat-label>Address(Optional)</mat-label>
+            <input matInput type="text" [(ngModel)]="user.address">
+            <button mat-button *ngIf="user.address" matSuffix mat-icon-button aria-label="Clear"
+                (click)="user.address=null">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <br>
+        <p> Role </p>
+        <mat-radio-group aria-label="Role" [(ngModel)]="user.user_type">
+            <mat-radio-button value="Fan">Fan</mat-radio-button>
+            <mat-radio-button value="Manager">Manager</mat-radio-button>
+        </mat-radio-group>
+        <mat-form-field style="margin-left: 10px;">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" [(ngModel)]="date" name="Date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+    </mat-card-content>
+    <mat-card-actions>
+        <div *ngIf="usernameFormControl.hasError('required') || passwordFormControl.hasError('required') 
+        || emailFormControl.hasError('email') || emailFormControl.hasError('required') || fnameFormControl.hasError('required')
+        || lnameFormControl.hasError('required')">
+            <button disabled="true" mat-button (click)="signUp()">Sign Up</button>
+        </div>
+        <div *ngIf="!(usernameFormControl.hasError('required') || passwordFormControl.hasError('required')
+        || emailFormControl.hasError('email') || emailFormControl.hasError('required') || fnameFormControl.hasError('required')
+        || lnameFormControl.hasError('required'))">
+            <button mat-button (click)="signUp()">Sign Up</button>
+        </div>
+    </mat-card-actions>
+</mat-card>

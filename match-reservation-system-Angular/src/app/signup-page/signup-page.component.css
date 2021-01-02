@@ -1,0 +1,26 @@
+.signup-card {
+    margin: auto;
+    width: 80%;
+    border: 3px solid rgb(0, 23, 128);
+    padding: 10px;
+    top: 10%;
+}
+  
+.signup-header-image {
+    background-image: url("../../assets/EPL.jpg");
+    background-size: cover;
+}
+
+.signup-input {
+    width: 70%;
+}
+
+.signup-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+}
