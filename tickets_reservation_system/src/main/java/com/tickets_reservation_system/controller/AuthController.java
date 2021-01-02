@@ -18,6 +18,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api/auth")
 public class AuthController {
 
@@ -34,7 +35,7 @@ public class AuthController {
 
     @ResponseBody
     @RequestMapping(method = RequestMethod.POST, value = "/signup")
-    public ResponseEntity<String> signup(@RequestBody User user) {
+    public ResponseEntity<Object> signup(@RequestBody User user) {
         String query = "INSERT INTO match_reservation_system.user VALUES ("
                 + "'" + user.getUsername() + "', "
                 + "'" + passwordEncoder.encode(user.getPw()) + "', "
@@ -51,13 +52,12 @@ public class AuthController {
         //System.out.println(query);
         try {
             jdbcTemplate.execute(query);
-            return new ResponseEntity<>("User Registered successfully", HttpStatus.OK);
+            return new ResponseEntity<Object>(new ArrayList<>(), HttpStatus.OK);
         }
         catch(Exception e) {
             System.out.println("Error:");
             System.out.println(e);
-            return new ResponseEntity<>("User Not Registered, Either username or email" +
-                    " already exists in the system", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Either username or email already exists", HttpStatus.FORBIDDEN);
         }
 
     }
