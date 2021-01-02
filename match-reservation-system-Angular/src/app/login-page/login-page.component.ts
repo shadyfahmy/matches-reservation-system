@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user';
 import { RegistrationService } from '../service/registration.service';
+import { ActiveAccountService } from '../service/active-account.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -13,6 +14,7 @@ export class LoginPageComponent implements OnInit {
   user: User;
 
   constructor(public registrationService: RegistrationService,
+    private activeAccountService: ActiveAccountService,
     private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
@@ -25,7 +27,8 @@ export class LoginPageComponent implements OnInit {
     console.log(this.user)
     if (this.user.username != '' && this.user.pw != '') {
       this.registrationService.signIn(this.user).subscribe(res => {
-        console.log(res);
+        console.log(res[0]['token'], res[1]['user']);
+        this.activeAccountService.setActiveUser(res[0]['token'], res[1]['user']);
       }, err => {
         console.log(err);
         this.openSnackBar(err.error);
