@@ -24,6 +24,10 @@ export class ActiveAccountService {
     localStorage.setItem("user", JSON.stringify(user));
   }
 
+  getUser(): User{
+    return JSON.parse(localStorage.getItem("user"));
+  }
+
   getToken(): string {
     let token = JSON.parse(localStorage.getItem("token"));
     if (!token) token = "";

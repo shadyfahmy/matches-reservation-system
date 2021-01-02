@@ -30,6 +30,7 @@ export class LoginPageComponent implements OnInit {
       this.registrationService.signIn(this.user).subscribe(res => {
         this.activeAccountService.setActiveUser(res[0]['token'], res[1]['user']);
         this.openSnackBar("Welcome !");
+        this.router.navigate(['/home']);
       }, err => {
         this.openSnackBar(err.error);
       });

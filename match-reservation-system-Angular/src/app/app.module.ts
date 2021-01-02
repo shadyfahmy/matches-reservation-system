@@ -24,6 +24,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { EditUserInfoPageComponent } from './edit-user-info-page/edit-user-info-page.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     HomePageComponent,
     LoginPageComponent,
     ProfilePageComponent,
-    SignupPageComponent
+    SignupPageComponent,
+    EditUserInfoPageComponent
   ],
   imports: [
     BrowserModule,

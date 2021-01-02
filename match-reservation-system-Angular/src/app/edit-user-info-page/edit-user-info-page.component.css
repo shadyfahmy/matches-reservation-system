@@ -1,0 +1,26 @@
+.edit-card {
+    margin: auto;
+    width: 80%;
+    border: 3px solid rgb(0, 23, 128);
+    padding: 10px;
+    top: 10%;
+}
+  
+.edit-header-image {
+    background-image: url("../../assets/EPL.jpg");
+    background-size: cover;
+}
+
+.edit-input {
+    width: 70%;
+}
+
+.edit-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+}
