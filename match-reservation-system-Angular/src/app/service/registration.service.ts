@@ -7,7 +7,7 @@ import { User } from '../models/user';
 })
 export class RegistrationService {
 
-  private host:string = 'http://localhost:8080/api/v1';
+  private host:string = 'http://localhost:8080/api/auth';
 
   constructor(public http: HttpClient) { }
 
@@ -19,14 +19,14 @@ export class RegistrationService {
 
     return this.http.post(this.host + "/signup", JSON.stringify(
     {
-      "firstName": user.fname,
-      "lastName": user.lname,
-      "dateOfBirth": user.dob,
+      "fname": user.fname,
+      "lname": user.lname,
+      "dob": user.dob,
       "username": user.username,
       "gender": user.gender,
-      "email": user.mail,
-      "password": user.pw,
-      "role": user.user_type,
+      "mail": user.mail,
+      "pw": user.pw,
+      "user_type": user.user_type,
       "address": user.address,
       "city": user.city,
       "approved": user.approved
@@ -41,7 +41,7 @@ export class RegistrationService {
     return this.http.post(this.host + "/signin", JSON.stringify(
       {
         "username": user.username,
-        "password": user.pw
+        "pw": user.pw
       }), httpOptions);
   }
 }

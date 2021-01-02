@@ -11,22 +11,22 @@
     <mat-card-content>
         <mat-form-field class="signin-input">
             <mat-label>Username</mat-label>
-            <input matInput type="text" [(ngModel)]="username">
-            <button mat-button *ngIf="username" matSuffix mat-icon-button aria-label="Clear" (click)="username=''">
+            <input matInput type="text" [(ngModel)]="user.username">
+            <button mat-button *ngIf="user.username" matSuffix mat-icon-button aria-label="Clear" (click)="user.username=''">
               <mat-icon>close</mat-icon>
             </button>
         </mat-form-field>
         <br>
         <mat-form-field class="signin-input">
             <mat-label>Password</mat-label>
-            <input matInput type="password" [(ngModel)]="password">
-            <button mat-button *ngIf="password" matSuffix mat-icon-button aria-label="Clear" (click)="password=''">
+            <input matInput type="password" [(ngModel)]="user.pw">
+            <button mat-button *ngIf="user.pw" matSuffix mat-icon-button aria-label="Clear" (click)="user.pw=''">
               <mat-icon>close</mat-icon>
             </button>
         </mat-form-field>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button>Sign in</button>
+      <button mat-button (click)="signIn()">Sign in</button>
       <button mat-button>Sign Up</button>
       <button mat-button>Guest</button>
     </mat-card-actions>
