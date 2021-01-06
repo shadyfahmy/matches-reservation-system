@@ -1,0 +1,14 @@
+#matches-container{
+    width: 85%;
+    margin-left: 160px;
+    margin-top: 30px;
+    z-index: -1;
+}
+
+#mainContainer{
+    margin-bottom: -20px;
+    padding-bottom: 20px;
+    min-height: 100%;
+    height: fit-content;
+    padding-bottom: 200px;
+}

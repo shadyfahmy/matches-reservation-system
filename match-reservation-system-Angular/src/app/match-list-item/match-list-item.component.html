@@ -1,0 +1,12 @@
+<mat-card id="item">Simple card
+    <button (click)="reserveClick()">Reserve</button>
+    <div style="margin: auto; text-align: center;" *ngIf="wantReserve">
+        <div *ngFor="let i of rows">
+          <button id="button{{i*10+j}}" mat-raised-button *ngFor="let j of seatPerRow"
+           (click)="select(i*10+j)" 
+           style="margin: 2px;"
+           [ngStyle]="{'background-color': reserved.includes(i*10+j) ? 'red' :
+            selected.includes(i*10+j) ? 'green' : nochange}">{{i*10 + j}}</button>
+        </div>
+      </div>
+</mat-card>
