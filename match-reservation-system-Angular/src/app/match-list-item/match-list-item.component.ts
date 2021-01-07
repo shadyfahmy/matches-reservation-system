@@ -8,7 +8,9 @@ import { Component, OnInit, Input } from '@angular/core';
 export class MatchListItemComponent implements OnInit {
 
   @Input() match:any;
+  stadium: any;
   wantReserve = false;
+  confirm = false;
   rows : any;
   seatPerRow : any;
   reserved : any;
@@ -16,8 +18,8 @@ export class MatchListItemComponent implements OnInit {
 
   constructor() {
 
-    this.rows = Array(this.match.number_of_rows).fill(0).map((x,i)=>i);
-    this.seatPerRow = Array(this.match.seats_per_row).fill(0).map((x,i)=>i);
+    this.rows = Array(this.stadium.number_of_rows).fill(0).map((x,i)=>i);
+    this.seatPerRow = Array(this.stadium.seats_per_row).fill(0).map((x,i)=>i);
     this.reserved = [];
 
   }
@@ -26,6 +28,9 @@ export class MatchListItemComponent implements OnInit {
   }
 
   reserveClick() {
+    if(this.wantReserve){
+      this.selected = []
+    }
     this.wantReserve = !this.wantReserve;
   }
 
@@ -38,5 +43,10 @@ export class MatchListItemComponent implements OnInit {
       this.selected.splice(temp,1)
     }
   }
+
+  confirmClick(){
+    this.confirm = !this.confirm;
+  }
+  
 
 }
