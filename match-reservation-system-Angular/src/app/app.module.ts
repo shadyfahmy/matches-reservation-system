@@ -30,6 +30,7 @@ import { ReservationsListComponent } from './reservations-list/reservations-list
 import { MatchListItemComponent } from './match-list-item/match-list-item.component';
 import { ReservationListItemComponent } from './reservation-list-item/reservation-list-item.component';
 import { AdminstratorPageComponent } from './adminstrator-page/adminstrator-page.component';
+import { MatchesPageComponent } from './matches-page/matches-page.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { AdminstratorPageComponent } from './adminstrator-page/adminstrator-page
     ReservationsListComponent,
     MatchListItemComponent,
     ReservationListItemComponent,
-    AdminstratorPageComponent
+    AdminstratorPageComponent,
+    MatchesPageComponent
   ],
   imports: [
     BrowserModule,

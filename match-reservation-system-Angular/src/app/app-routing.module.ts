@@ -6,7 +6,7 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { SignupPageComponent } from './signup-page/signup-page.component';
 import { EditUserInfoPageComponent } from './edit-user-info-page/edit-user-info-page.component';
 import { AdminstratorPageComponent } from './adminstrator-page/adminstrator-page.component';
-
+import { MatchesPageComponent} from './matches-page/matches-page.component'
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'edit', component: EditUserInfoPageComponent },
   { path: 'profile', component: ProfilePageComponent },
   { path: 'signup', component: SignupPageComponent },
+  { path: 'matches', component: MatchesPageComponent },
   { path: 'adminstrator', component: AdminstratorPageComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home', pathMatch: 'full' },

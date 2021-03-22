@@ -1,0 +1,25 @@
+.new-match-card {
+    margin: auto;
+    width: 80%;
+    border: 3px solid rgb(0, 23, 128);
+    padding: 10px;
+    top: 10%;
+}
+  
+.new-match-header-image {
+    background-image: url("../../assets/EPL.jpg");
+    background-size: cover;
+}
+
+.new-match-form {
+    width: 90%;
+    margin-left: 10px;
+}
+
+.create-match-button {
+    min-width: 150px;
+    width: 100%;
+    margin-left: 10px;
+
+    align-items: center;
+}

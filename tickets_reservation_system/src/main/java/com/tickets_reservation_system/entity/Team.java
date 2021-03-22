@@ -12,4 +12,14 @@ public class Team {
     {
         this.team_name=team_name;
     }
+
+    public String getTeam_name() {
+        return this.team_name;
+    }
+
+    public void setTeam_name(String team_name) {
+        this.team_name = team_name;
+    }
+
 }
+
