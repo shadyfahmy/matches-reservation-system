@@ -1,8 +1,6 @@
-import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators  } from '@angular/forms';
 import { Match } from '../models/match';
-import { Team } from '../models/team';
 import { CreateMatchService } from '../service/create-match.service';
 import { EditMatchService } from '../service/edit-match.service';
 
@@ -19,6 +17,19 @@ import { MatSnackBar } from '@angular/material';
 })
 
 export class MatchesPageComponent implements OnInit {
+  constructor(public createMatchService: CreateMatchService,
+    public editMatchService: EditMatchService,
+    private _snackBar: MatSnackBar) {
+    this.listTeams();
+    this.listMatches();
+    this.listStadiums();
+    this.match = new Match();
+    console.log(this.match);
+    this.matchEdited = new Match();
+    this.matchBeforeEdit = new Match();
+    this.matchSelected = false;
+   }
+
   teams:any;
   stadiums:any;
   match:Match;
@@ -30,18 +41,7 @@ export class MatchesPageComponent implements OnInit {
   date = new Date(new Date().getFullYear()+ 0,0,0,1,0,0,0).toISOString().slice(0, 16);
   minDate = new Date(new Date().getFullYear()+ 0,0,0,1,0,0,0);
   maxDate = new Date(new Date().getFullYear()+ 5,0,0,0,0,0,0);
-  constructor(public createMatchService: CreateMatchService,
-    public editMatchService: EditMatchService,
-    private _snackBar: MatSnackBar) {
-    this.listTeams();
-    this.listMatches();
-    this.listStadums();
-    this.match = new Match();
-    console.log(this.match);
-    this.matchEdited = new Match();
-    this.matchBeforeEdit = new Match();
-    this.matchSelected = false;
-   }
+ 
 
   homeTeamFormControl = new FormControl('', [
     Validators.required,
@@ -101,7 +101,7 @@ export class MatchesPageComponent implements OnInit {
     console.log(this.date);
 
   }
-  listStadums() {
+  listStadiums() {
     this.stadiums = [];
     this.createMatchService.listAllStadiums().subscribe(stadiums => {
       this.stadiums = stadiums;

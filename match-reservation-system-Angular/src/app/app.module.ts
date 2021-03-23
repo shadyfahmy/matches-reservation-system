@@ -31,6 +31,7 @@ import { MatchListItemComponent } from './match-list-item/match-list-item.compon
 import { ReservationListItemComponent } from './reservation-list-item/reservation-list-item.component';
 import { AdminstratorPageComponent } from './adminstrator-page/adminstrator-page.component';
 import { MatchesPageComponent } from './matches-page/matches-page.component';
+import { CreateStadiumPageComponent } from './create-stadium-page/create-stadium-page.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { MatchesPageComponent } from './matches-page/matches-page.component';
     MatchListItemComponent,
     ReservationListItemComponent,
     AdminstratorPageComponent,
-    MatchesPageComponent
+    MatchesPageComponent,
+    CreateStadiumPageComponent
   ],
   imports: [
     BrowserModule,

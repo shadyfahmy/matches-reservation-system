@@ -1,4 +1,4 @@
-.match-page-card {
+.stadium-page-card {
     margin: auto;
     width: 80%;
     border: 3px solid rgb(0, 23, 128);
@@ -6,17 +6,17 @@
     top: 10%;
 }
   
-.match-page-header-image {
+.stadium-page-header-image {
     background-image: url("../../assets/EPL.jpg");
     background-size: cover;
 }
 
-.match-page-form {
+.stadium-page-form {
     width: 90%;
     margin-left: 10px;
 }
 
-.match-button {
+.stadium-button {
     min-width: 150px;
     width: 100%;
     margin-left: 10px;

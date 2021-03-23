@@ -1,0 +1,88 @@
+<mat-toolbar color="primary">
+    <span>Egyptian Premier League</span>
+</mat-toolbar>
+
+<mat-card class="stadium-page-card">
+    <mat-card-header>
+        <div mat-card-avatar class="stadium-page-header-image"></div>
+        <mat-card-title>Create New Stadium</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form class="stadium-page-form">
+            <mat-form-field class="stadium-page-form">
+                <mat-label>Stadium Name</mat-label>
+                <input matInput type="text" [formControl]="nameFormControl" name="stadiumName" [(ngModel)]="stadium.name">
+                <button mat-button *ngIf="stadium.name" matSuffix mat-icon-button aria-label="Clear"
+                    (click)="stadium.name=null">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <mat-error *ngIf="nameFormControl.hasError('required')">
+                    Stadium Name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="stadium-page-form">
+                <mat-label>Select a city</mat-label>
+                <mat-select [(value)]="stadium.city" [formControl]="cityFormControl">
+                    <mat-option value="Giza">Giza</mat-option>
+                    <mat-option value="Cairo">Cairo</mat-option>
+                    <mat-option value="Alexandria">Alexandria</mat-option>
+                    <mat-option value="Faiyum">Faiyum</mat-option>
+                </mat-select>
+                <mat-error *ngIf="cityFormControl.hasError('required')">
+                    Stadium Name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="stadium-page-form">
+                <mat-label>Number of Rows</mat-label>
+                <input matInput [min]="1" type="number" [max]="1000" [formControl]="noOfRowsFormControl" name="noOfRows" [(ngModel)]="stadium.number_of_rows">
+                <button mat-button *ngIf="stadium.number_of_rows" matSuffix mat-icon-button aria-label="Clear"
+                    (click)="stadium.number_of_rows=null">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <mat-error *ngIf="noOfRowsFormControl.hasError('required')">
+                    Number of Rows is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="noOfRowsFormControl.hasError('max')">
+                    Max Number of Rows is <strong>1000</strong>
+                </mat-error>
+                <mat-error *ngIf="noOfRowsFormControl.hasError('min')">
+                    Min of Rows is <strong>1</strong>
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="stadium-page-form">
+                <mat-label>Seats per Row</mat-label>
+                <input matInput [min]="1" type="number" [max]="1000" [formControl]="seatsPerRowFormControl" name="seatsPerRow" [(ngModel)]="stadium.seats_per_row">
+                <button mat-button *ngIf="stadium.seats_per_row" matSuffix mat-icon-button aria-label="Clear"
+                    (click)="stadium.seats_per_row=null">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <mat-error *ngIf="seatsPerRowFormControl.hasError('required')">
+                    Number of Rows is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="seatsPerRowFormControl.hasError('max')">
+                    Max Number of Rows is <strong>1000</strong>
+                </mat-error>
+                <mat-error *ngIf="seatsPerRowFormControl.hasError('min')">
+                    Min Number of Rows is <strong>1</strong>
+                </mat-error>
+            </mat-form-field>
+
+</form>
+</mat-card-content>
+
+    <mat-card-actions>
+        <div class="stadium-button" *ngIf="cityFormControl.hasError('required') || nameFormControl.hasError('required') || noOfRowsFormControl.hasError('required')
+        || noOfRowsFormControl.hasError('max') || noOfRowsFormControl.hasError('min') || seatsPerRowFormControl.hasError('required')
+        || seatsPerRowFormControl.hasError('max') || seatsPerRowFormControl.hasError('min')">
+            <button disabled="true" mat-button (click)="createStadium()">Create Stadium</button>
+        </div>
+        <div class="stadium-button" *ngIf="!cityFormControl.hasError('required') && !nameFormControl.hasError('required') && !noOfRowsFormControl.hasError('required')
+        && !noOfRowsFormControl.hasError('max')  && !noOfRowsFormControl.hasError('min') && !seatsPerRowFormControl.hasError('required')
+        && !seatsPerRowFormControl.hasError('max')  && !seatsPerRowFormControl.hasError('min')">
+            <button mat-button (click)="createStadium()">Create Stadium</button>
+        </div>
+    </mat-card-actions>
+</mat-card>
