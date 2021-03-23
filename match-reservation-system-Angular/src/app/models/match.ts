@@ -1,4 +1,5 @@
 export class Match {
+    match_id: number;
     home_team:  string;
     away_team:  string;
     match_date_time:    any;

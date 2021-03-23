@@ -3,6 +3,7 @@ package com.tickets_reservation_system.controller;
 import com.tickets_reservation_system.entity.User;
 import com.tickets_reservation_system.entity.Stadium;
 import com.tickets_reservation_system.entity.Team;
+import com.tickets_reservation_system.entity.Match;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
@@ -90,6 +91,47 @@ public class MatchController {
         }
     }
 
+ /*
+    This is an endpoint that returns all available matches
+    */
+    @ResponseBody
+    @RequestMapping(method = RequestMethod.GET, value = "/getMatches")
+    public List<Match> getMatches()
+    {
+        // Get authenticated user info.
+        Object user = SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        // Make sure user has access to this table
+        String user_type =  ((User)user).getUser_type();
+
+        if(!user_type.equals("Manager") && !user_type.equals("Admin"))
+            return Collections.emptyList();
+        String query = "select * from match_reservation_system.match;";
+        System.out.println("Returning All Matches");
+
+        try {
+            return jdbcTemplate.query(query,
+                    new RowMapper<Match>() {
+                        public Match mapRow(ResultSet rs, int rowNum) throws SQLException {
+                            Match m = new Match();
+                            m.setMatchId(rs.getInt("match_id"));
+                            m.setHome_team(rs.getString("home_team"));
+                            m.setAway_team(rs.getString("away_team"));
+                            m.setMatch_Date_time(rs.getString("match_date_time"));
+                            m.setMain_refree(rs.getString("main_refree"));
+                            m.setLinesman1(rs.getString("linesman1"));
+                            m.setLinesman2(rs.getString("linesman2"));
+                            m.setStadium_id(rs.getInt("stadium_id"));
+                            return m;
+                        }
+                    });
+        }
+        catch(Exception e) {
+            System.out.println("Error retrieving matches at /getMatches");
+            System.out.println(e);
+            return Collections.emptyList();
+        }
+    }
 
     /*
     This is an endpoint that returns all available teams
@@ -139,9 +181,10 @@ public class MatchController {
                 .getPrincipal();
         // Make sure user has access to this table
         String user_type =  ((User)user).getUser_type();
-
+        
         if(!user_type.equals("Manager") && !user_type.equals("Admin"))
             return new ResponseEntity<>("ACCESS DENIED!", HttpStatus.FORBIDDEN);
+        System.out.println("Trying to create stadium");
         String query = "INSERT INTO match_reservation_system.stadium VALUES (NULL, "
                         + "'" + stadium.getCity() + "', "
                         + "'" + stadium.getName() + "', "
@@ -150,12 +193,87 @@ public class MatchController {
 
         try {
             jdbcTemplate.execute(query);
+            System.out.println("Stadium created!");
             return new ResponseEntity<Object>(new ArrayList<>(), HttpStatus.OK);
         }
         catch(Exception e) {
             System.out.println("Error:");
             System.out.println(e);
             return new ResponseEntity<>("Error adding stadium.", HttpStatus.FORBIDDEN);
+        }
+    }
+
+
+
+    /*
+    This is an endpoint that creates a new match
+    */
+    @ResponseBody
+    @RequestMapping(method = RequestMethod.POST, value = "/createMatch")
+    public ResponseEntity<Object> createMatch(@RequestBody Match match)
+    {
+        // Get authenticated user info.
+        Object user = SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        // Make sure user has access to this table
+        String user_type =  ((User)user).getUser_type();
+        System.out.println("Trying to create match");
+        if(!user_type.equals("Manager") && !user_type.equals("Admin"))
+            return new ResponseEntity<>("ACCESS DENIED!", HttpStatus.FORBIDDEN);
+        String query = "INSERT INTO match_reservation_system.match VALUES (NULL, "
+                        + "'" + match.getHome_team() + "', "
+                        + "'" + match.getAway_team() + "', "
+                        + "'" + match.getMatch_date_time() + "', "
+                        + "'" + match.getMain_refree() + "', "
+                        + "'" + match.getLinesman1() + "', "
+                        + "'" + match.getLinesman2() + "', "
+                        + "'" + match.getStadium_id() + "');";
+
+        try {
+            jdbcTemplate.execute(query);
+            System.out.println("Match created!");
+            return new ResponseEntity<Object>(new ArrayList<>(), HttpStatus.OK);
+        }
+        catch(Exception e) {
+            System.out.println("Error:");
+            System.out.println(e);
+            return new ResponseEntity<>("Error adding match.", HttpStatus.FORBIDDEN);
+        }
+        
+    }
+    /*
+    This endpoint enable user to edit match in database.
+    */
+    @ResponseBody
+    @RequestMapping(method = RequestMethod.PUT, value = "/editMatch")
+    public ResponseEntity<Object> edit(@RequestBody Match match) {
+        // Get authenticated user info.
+        Object user = SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        // Make sure user has access to this table
+        String user_type =  ((User)user).getUser_type();
+        System.out.println("Trying to edit match");
+        if(!user_type.equals("Manager") && !user_type.equals("Admin"))
+            return new ResponseEntity<>("ACCESS DENIED!", HttpStatus.FORBIDDEN);
+
+        String query = "UPDATE match_reservation_system.match SET "
+                + "home_team = '" + match.getHome_team() + "', "
+                + "away_team = '" + match.getAway_team() + "', "
+                + "match_date_time = '" + match.getMatch_date_time() + "', "
+                + "main_refree = '" + match.getMain_refree() + "', "
+                + "linesman1 = '" + match.getLinesman1() + "', "
+                + "linesman2 = '" + match.getLinesman2() + "', "
+                + "stadium_id = '" + match.getStadium_id() + "' "
+                + "WHERE match_id = '" + match.getMatch_id() + "';";
+        try {
+            System.out.println(query);
+            jdbcTemplate.execute(query);
+            System.out.println("Match Edited!");
+            return new ResponseEntity<Object>(new ArrayList<>(), HttpStatus.OK);
+        } catch (Exception e) {
+            System.out.println("Error:");
+            System.out.println(e);
+            return new ResponseEntity<>("Error editing Match", HttpStatus.CONFLICT);
         }
     }
 
