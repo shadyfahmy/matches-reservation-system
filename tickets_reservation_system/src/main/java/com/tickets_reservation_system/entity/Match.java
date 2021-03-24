@@ -24,4 +24,36 @@ public class Match {
         this.linesman2=linesman2;
         this.stadium_id=stadium_id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setAway_team(String away_team) {
+        this.away_team = away_team;
+    }
+
+    public void setHome_team(String home_team) {
+        this.home_team = home_team;
+    }
+
+    public void setDate_time(String date_time) {
+        this.date_time = date_time;
+    }
+
+    public void setLinesman1(String linesman1) {
+        this.linesman1 = linesman1;
+    }
+
+    public void setMain_referee(String main_referee) {
+        this.main_referee = main_referee;
+    }
+
+    public void setLinesman2(String linesman2) {
+        this.linesman2 = linesman2;
+    }
+
+    public void setStadium_id(int stadium_id) {
+        this.stadium_id = stadium_id;
+    }
 }
