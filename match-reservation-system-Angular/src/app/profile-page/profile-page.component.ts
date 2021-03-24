@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActiveAccountService } from '../service/active-account.service'
 
 @Component({
   selector: 'app-profile-page',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile-page.component.css']
 })
 export class ProfilePageComponent implements OnInit {
-  user_type = "fan";
-  constructor() { }
+  user_type: string;
+  constructor(private activeAccountService: ActiveAccountService) { }
 
   ngOnInit() {
+    this.user_type = this.activeAccountService.getUser().user_type;
   }
 
 }

@@ -15,4 +15,20 @@ public class Ticket {
         this.username=username;
         this.seat_num=seat_num;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getMatch_id() {
+        return match_id;
+    }
+
+    public int getSeat_num() {
+        return seat_num;
+    }
+
+    public String getUsername() {
+        return username;
+    }
 }

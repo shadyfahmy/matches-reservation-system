@@ -27,6 +27,20 @@ export class EditMatchService{
     return this.http.get<Match[]>(this.host + "/getMatches", httpOptions);
   }
 
+  getAllMatches(): Observable<Match[]> {
+    return this.http.get<Match[]>(this.host + "/allmatches");
+  }
+
+  getStadium(id): Observable<Stadium> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'authorization': this.activeAccountService.getToken()
+      })
+    }
+    return this.http.get<Stadium>(this.host + "/stadium?id="+id, httpOptions);
+  }
+
 
   editMatch(match: Match) {
     const httpOptions = {

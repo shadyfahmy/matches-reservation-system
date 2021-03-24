@@ -60,14 +60,14 @@ public class MatchController {
     public List<Stadium> getStadiums()
     {
         // Get authenticated user info.
-        Object user = SecurityContextHolder.getContext().getAuthentication()
+        /*Object user = SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
         // Make sure user has access to this table
         String user_type =  ((User)user).getUser_type();
 
         if(!user_type.equals("Manager") && !user_type.equals("Admin"))
-            return Collections.emptyList();
-        String query = "select * from stadium";
+            return Collections.emptyList();*/
+        String query = "select * from stadium order by stadium_id asc";
         System.out.println("All Stadiums Returned");
 
         try {
@@ -94,48 +94,10 @@ public class MatchController {
     /*
        This is an endpoint that returns all available matches
        */
-    @ResponseBody
-    @RequestMapping(method = RequestMethod.GET, value = "/getMatches")
-    public List<Match> getMatches()
-    {
-        // Get authenticated user info.
-        Object user = SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();
-        // Make sure user has access to this table
-        String user_type =  ((User)user).getUser_type();
-
-        if(!user_type.equals("Manager") && !user_type.equals("Admin"))
-            return Collections.emptyList();
-        String query = "select * from match_reservation_system.match;";
-        System.out.println("Returning All Matches");
-
-        try {
-            return jdbcTemplate.query(query,
-                    new RowMapper<Match>() {
-                        public Match mapRow(ResultSet rs, int rowNum) throws SQLException {
-                            Match m = new Match();
-                            m.setMatchId(rs.getInt("match_id"));
-                            m.setHome_team(rs.getString("home_team"));
-                            m.setAway_team(rs.getString("away_team"));
-                            m.setMatch_Date_time(rs.getString("match_date_time"));
-                            m.setMain_refree(rs.getString("main_refree"));
-                            m.setLinesman1(rs.getString("linesman1"));
-                            m.setLinesman2(rs.getString("linesman2"));
-                            m.setStadium_id(rs.getInt("stadium_id"));
-                            return m;
-                        }
-                    });
-        }
-        catch(Exception e) {
-            System.out.println("Error retrieving matches at /getMatches");
-            System.out.println(e);
-            return Collections.emptyList();
-        }
-    }
-
     /*
     This is an endpoint that returns all available teams
     */
+
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET, value = "/getTeams")
     public List<Team> getTeams()
@@ -163,6 +125,76 @@ public class MatchController {
         }
         catch(Exception e) {
             System.out.println("Error retrieving teams at /getTeams");
+            System.out.println(e);
+            return Collections.emptyList();
+        }
+    }
+    @ResponseBody
+    @RequestMapping(method = RequestMethod.GET, value = "/getMatches")
+    public List<Match> getMatches()
+    {
+        // Get authenticated user info.
+        Object user = SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        // Make sure user has access to this table
+        String user_type =  ((User)user).getUser_type();
+
+        if(!user_type.equals("Manager") && !user_type.equals("Admin"))
+            return Collections.emptyList();
+        String query = "select * from match_reservation_system.match";
+        System.out.println("Returning All Matches");
+
+        try {
+            return jdbcTemplate.query(query,
+                    new RowMapper<Match>() {
+                        public Match mapRow(ResultSet rs, int rowNum) throws SQLException {
+                            Match m = new Match();
+                            m.setMatchId(rs.getInt("match_id"));
+                            m.setHome_team(rs.getString("home_team"));
+                            m.setAway_team(rs.getString("away_team"));
+                            m.setMatch_Date_time(rs.getString("match_date_time"));
+                            m.setMain_refree(rs.getString("main_refree"));
+                            m.setLinesman1(rs.getString("linesman1"));
+                            m.setLinesman2(rs.getString("linesman2"));
+                            m.setStadium_id(rs.getInt("stadium_id"));
+                            return m;
+                        }
+                    });
+        }
+        catch(Exception e) {
+            System.out.println("Error retrieving matches at /getMatches");
+            System.out.println(e);
+            return Collections.emptyList();
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping(method = RequestMethod.GET, value = "/allmatches")
+    public List<Match> getAllMatches()
+    {
+
+        String query = "select * from match_reservation_system.match order by match_date_time desc;";
+        System.out.println("Returning All Matches");
+
+        try {
+            return jdbcTemplate.query(query,
+                    new RowMapper<Match>() {
+                        public Match mapRow(ResultSet rs, int rowNum) throws SQLException {
+                            Match m = new Match();
+                            m.setMatchId(rs.getInt("match_id"));
+                            m.setHome_team(rs.getString("home_team"));
+                            m.setAway_team(rs.getString("away_team"));
+                            m.setMatch_Date_time(rs.getString("match_date_time"));
+                            m.setMain_refree(rs.getString("main_refree"));
+                            m.setLinesman1(rs.getString("linesman1"));
+                            m.setLinesman2(rs.getString("linesman2"));
+                            m.setStadium_id(rs.getInt("stadium_id"));
+                            return m;
+                        }
+                    });
+        }
+        catch(Exception e) {
+            System.out.println("Error retrieving matches at /getMatches");
             System.out.println(e);
             return Collections.emptyList();
         }
