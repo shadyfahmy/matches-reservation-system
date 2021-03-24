@@ -18,7 +18,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // Because we are using jwt we can disable this feature
         httpSecurity.cors().and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/auth/**", "/test")
+                .antMatchers("/api/auth/**", "/test", "/ws/**", "/ws", "/allmatches")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

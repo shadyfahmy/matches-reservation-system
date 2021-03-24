@@ -51,7 +51,7 @@ public class MatchController {
         System.out.println(((User)user).getUser_type());
         System.out.println("Test");
     }
-    
+
     /*
     This is an endpoint that returns all available stadiums
     */
@@ -91,9 +91,9 @@ public class MatchController {
         }
     }
 
- /*
-    This is an endpoint that returns all available matches
-    */
+    /*
+       This is an endpoint that returns all available matches
+       */
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET, value = "/getMatches")
     public List<Match> getMatches()
@@ -186,13 +186,13 @@ public class MatchController {
         if(!user_type.equals("Manager") && !user_type.equals("Admin"))
             return new ResponseEntity<>("ACCESS DENIED!", HttpStatus.FORBIDDEN);
         String query = "INSERT INTO match_reservation_system.match VALUES (NULL, "
-                        + "'" + match.getHome_team() + "', "
-                        + "'" + match.getAway_team() + "', "
-                        + "'" + match.getMatch_date_time() + "', "
-                        + "'" + match.getMain_refree() + "', "
-                        + "'" + match.getLinesman1() + "', "
-                        + "'" + match.getLinesman2() + "', "
-                        + "'" + match.getStadium_id() + "');";
+                + "'" + match.getHome_team() + "', "
+                + "'" + match.getAway_team() + "', "
+                + "'" + match.getMatch_date_time() + "', "
+                + "'" + match.getMain_refree() + "', "
+                + "'" + match.getLinesman1() + "', "
+                + "'" + match.getLinesman2() + "', "
+                + "'" + match.getStadium_id() + "');";
 
         try {
             jdbcTemplate.execute(query);
@@ -204,7 +204,7 @@ public class MatchController {
             System.out.println(e);
             return new ResponseEntity<>("Error adding match.", HttpStatus.FORBIDDEN);
         }
-        
+
     }
     /*
     This endpoint enable user to edit match in database.
