@@ -6,6 +6,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { TicketsService } from '../service/tickets.service'
 import { from } from 'rxjs';
 import { Ticket } from '../models/ticket';
+import * as Stomp from 'stompjs';
+import * as SockJS from 'sockjs-client';
 
 @Component({
   selector: 'app-match-list-item',
@@ -14,22 +16,24 @@ import { Ticket } from '../models/ticket';
 })
 export class MatchListItemComponent implements OnInit {
 
+  stompClient = null;
   @Input() match:Match;
   @Input() stadium: Stadium;
   wantReserve = false;
   confirm = false;
   rows : any;
   seatPerRow : any;
-  reserved : any;
+  reserved = [];
   selected = [];
   cardNum: string;
   pin: string;
+  subscribed = false;
 
   constructor(private activeAccountService : ActiveAccountService,
     private _snackBar: MatSnackBar,
     private ticketsService: TicketsService) {
 
-
+      this.connect();
   }
 
   ngOnInit() {
@@ -45,6 +49,10 @@ export class MatchListItemComponent implements OnInit {
   }
 
   reserveClick() {
+    if(!this.subscribed){
+      this.sub();
+      this.subscribed = true;
+    }
     if(this.wantReserve){
       this.selected = []
     }
@@ -92,11 +100,11 @@ export class MatchListItemComponent implements OnInit {
 
     this.ticketsService.reserveTicket(this.selected, this.match.match_id).subscribe(()=>{
       this.openSnackBar("Tickets reserved successfully");
-      for(let i = 0; i < this.selected.length; i++)
-        this.reserved.push(this.selected[i])
-      this.ngOnInit();
       this.wantReserve=false;
       this.confirm=false;
+      this.selected = []
+      this.sendMsg();
+      //this.ngOnInit();
     }, err => {
       this.openSnackBar(err.error);
     });
@@ -117,6 +125,25 @@ export class MatchListItemComponent implements OnInit {
       duration: 2000,
       horizontalPosition: 'center',
       verticalPosition: 'bottom',
+    });
+  }
+
+  connect() {
+    var socket = new SockJS('http://localhost:8080/ws');
+    this.stompClient = Stomp.over(socket);
+    console.log(this.stompClient)
+    this.stompClient.connect();
+  }
+
+  sendMsg() {
+    this.stompClient.send("/app/hello", {}, JSON.stringify({'content': 'refreeesh'}));
+  }
+
+  sub() {
+    let that = this;
+    this.stompClient.subscribe('/topic/greetings', function (greeting) {
+      //console.log("recieveeeed");
+      that.ngOnInit();
     });
   }
   
