@@ -1,18 +1,21 @@
 package com.tickets_reservation_system.controller;
 
-import com.tickets_reservation_system.entity.Res;
-import com.tickets_reservation_system.entity.Reservation;
-import com.tickets_reservation_system.entity.User;
+import com.tickets_reservation_system.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @RestController
 @CrossOrigin("*")
@@ -68,6 +71,30 @@ public class TicketController {
             System.out.println("Error:");
             System.out.println(e);
             return new ResponseEntity<>("Error reserving ticket.", HttpStatus.FORBIDDEN);
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping(method = RequestMethod.GET, value = "/api/ticket/getreserved")
+    public List<Ticket> getReserved(@RequestParam(name = "match") int match)
+    {
+        String query = "select * from ticket where match_id = " + Integer.toString(match) ;
+        try {
+            return jdbcTemplate.query(query,
+                    new RowMapper<Ticket>() {
+                        public Ticket mapRow(ResultSet rs, int rowNum) throws SQLException {
+                            Ticket t = new Ticket();
+                            t.setId(rs.getInt("ticket_id"));
+                            t.setSeat_number(rs.getInt("seat_number"));
+                            t.setUsername(rs.getString("username"));
+                            t.setMatch_id(rs.getInt("match_id"));
+                            return t;
+                        }
+                    });
+        }
+        catch(Exception e) {
+            System.out.println(e);
+            return Collections.emptyList();
         }
     }
 

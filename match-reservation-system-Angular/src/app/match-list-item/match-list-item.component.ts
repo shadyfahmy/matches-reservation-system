@@ -40,6 +40,8 @@ export class MatchListItemComponent implements OnInit {
     this.reserved = [];
     this.selected = [];
     console.log(this.rows)
+    this.getReserved();
+    console.log(this.reserved)
   }
 
   reserveClick() {
@@ -52,7 +54,7 @@ export class MatchListItemComponent implements OnInit {
   select(x) {
     if(this.future() && this.isFan()) {
       console.log(x);
-      if(this.selected.includes(x) == false)
+      if(this.selected.includes(x) == false && this.reserved.includes(x) == false)
         this.selected.push(x)
       else {
         let temp = this.selected.indexOf(x)
@@ -90,13 +92,24 @@ export class MatchListItemComponent implements OnInit {
 
     this.ticketsService.reserveTicket(this.selected, this.match.match_id).subscribe(()=>{
       this.openSnackBar("Tickets reserved successfully");
+      for(let i = 0; i < this.selected.length; i++)
+        this.reserved.push(this.selected[i])
+      this.ngOnInit();
+      this.wantReserve=false;
+      this.confirm=false;
     }, err => {
       this.openSnackBar(err.error);
     });
-    this.ngOnInit();
-    this.wantReserve=false;
-    this.confirm=false;
 
+  }
+
+  getReserved() {
+    this.ticketsService.getReservedSeats(this.match.match_id).subscribe(data => {
+      console.log(data)
+      for(let i = 0; i < data.length; i++){
+        this.reserved.push(data[i].seat_number)
+      }
+    })
   }
 
   openSnackBar(msg: string) {

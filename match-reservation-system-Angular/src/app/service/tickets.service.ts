@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ActiveAccountService } from './active-account.service';
 import { Ticket } from '../models/ticket';
+import { Match } from '../models/match';
 
 
 @Injectable({
@@ -28,6 +29,17 @@ export class TicketsService {
         "match":match,
         "tickets":tickets
       }), httpOptions);
+  }
+
+  getReservedSeats(match) {
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'authorization': this.activeAccountService.getToken()
+      })
+    }
+    return this.http.get<Ticket[]>(this.host + "/getreserved?match="+match, httpOptions);
+
   }
 
 }
