@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ActiveAccountService } from './active-account.service';
 import { Ticket } from '../models/ticket';
 import { Match } from '../models/match';
+import { DetailedReservation } from '../models/detailedReservation';
 
 
 @Injectable({
@@ -40,6 +41,27 @@ export class TicketsService {
     }
     return this.http.get<Ticket[]>(this.host + "/getreserved?match="+match, httpOptions);
 
+  }
+
+  getReservations() {
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'authorization': this.activeAccountService.getToken()
+      })
+    }
+    console.log(this.activeAccountService.getToken())
+    return this.http.get<DetailedReservation[]>(this.host + "/getreservations", httpOptions);
+  }
+
+  cancelReservation(seat: number, match: number) {
+    const httpOptions = {
+      headers: new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'authorization': this.activeAccountService.getToken()
+      })
+    }
+    return this.http.delete(this.host + "/cancelreservation?match="+match+"&seat="+seat, httpOptions);
   }
 
 }

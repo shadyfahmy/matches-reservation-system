@@ -104,7 +104,6 @@ export class MatchListItemComponent implements OnInit {
       this.confirm=false;
       this.selected = []
       this.sendMsg();
-      //this.ngOnInit();
     }, err => {
       this.openSnackBar(err.error);
     });
