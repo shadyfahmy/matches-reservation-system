@@ -8,7 +8,7 @@
     <mat-tab *ngIf="user_type == 'manager'" label="Stadiums"> Reservations </mat-tab>
     <mat-tab *ngIf="user_type == 'fan'" label="Upcoming Matches"> Upcoming Matches </mat-tab>
     <mat-tab *ngIf="user_type == 'fan'" label="Reservations"> Reservations </mat-tab>
-    <mat-tab *ngIf="user_type == 'fan'" label="Edit Data"> Edit Data </mat-tab>
+    <mat-tab *ngIf="user_type == 'fan'" label="Edit Data"> <app-edit-user-info-page></app-edit-user-info-page> </mat-tab>
   </mat-tab-group>
 <p>profile-page works!</p>
 <h1>BEACH PLEASE</h1>
