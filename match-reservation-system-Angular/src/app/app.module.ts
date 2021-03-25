@@ -25,6 +25,13 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { EditUserInfoPageComponent } from './edit-user-info-page/edit-user-info-page.component';
+import { MatchesListComponent } from './matches-list/matches-list.component';
+import { ReservationsListComponent } from './reservations-list/reservations-list.component';
+import { MatchListItemComponent } from './match-list-item/match-list-item.component';
+import { ReservationListItemComponent } from './reservation-list-item/reservation-list-item.component';
+import { AdminstratorPageComponent } from './adminstrator-page/adminstrator-page.component';
+import { MatchesPageComponent } from './matches-page/matches-page.component';
+import { CreateStadiumPageComponent } from './create-stadium-page/create-stadium-page.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +40,14 @@ import { EditUserInfoPageComponent } from './edit-user-info-page/edit-user-info-
     LoginPageComponent,
     ProfilePageComponent,
     SignupPageComponent,
-    EditUserInfoPageComponent
+    EditUserInfoPageComponent,
+    MatchesListComponent,
+    ReservationsListComponent,
+    MatchListItemComponent,
+    ReservationListItemComponent,
+    AdminstratorPageComponent,
+    MatchesPageComponent,
+    CreateStadiumPageComponent
   ],
   imports: [
     BrowserModule,

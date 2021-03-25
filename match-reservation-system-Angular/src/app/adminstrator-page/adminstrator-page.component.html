@@ -1,0 +1,48 @@
+<div>
+    <mat-toolbar color="primary">
+        <span>Egyptian Premier League</span>
+    </mat-toolbar>
+    <button (click) = "listAccounts()" mat-raised-button color="primary">list of accounts</button>
+    <button (click) = "listPending()" mat-raised-button color="primary">list of pending accounts</button>
+    <div class="card">
+        <table>
+            <tr>
+                <th>username</th>
+                <th>first name</th>
+                <th>last name</th>
+                <th>date of birth</th>
+                <th>gender</th>
+                <th>city</th>
+                <th>address</th>
+                <th>E-mail</th>
+                <th>user type</th>
+                <th>options</th>
+            </tr>
+            <tr *ngFor = "let user of users" class="edit">
+                <td>{{user.username}}</td>
+                <td>{{user.fname}}</td>
+                <td>{{user.lname}}</td>
+                <td>{{user.dob}}</td>
+                <td>{{user.gender}}</td>
+                <td>{{user.city}}</td>
+                <td>{{user.address}}</td>
+                <td>{{user.mail}}</td>
+                <td>{{user.user_type}}</td>
+                <td><button (click)="onDelete(user)" class="del">delete</button></td>
+            </tr>
+            <tr *ngFor = "let user of pendingUsers" class="pending">
+                <td>{{user.username}}</td>
+                <td>{{user.fname}}</td>
+                <td>{{user.lname}}</td>
+                <td>{{user.dob}}</td>
+                <td>{{user.gender}}</td>
+                <td>{{user.city}}</td>
+                <td>{{user.address}}</td>
+                <td>{{user.mail}}</td>
+                <td>{{user.user_type}}</td>
+                <td><button (click)="accept(user)" class="del delL">accept</button><button (click)="reject(user)" class="del delR">reject</button></td>
+            </tr>
+        </table>
+    </div>
+    
+</div>

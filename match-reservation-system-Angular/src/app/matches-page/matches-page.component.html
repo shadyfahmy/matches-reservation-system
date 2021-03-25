@@ -1,0 +1,225 @@
+<mat-toolbar color="primary">
+    <span>Egyptian Premier League</span>
+</mat-toolbar>
+
+<mat-card class="match-page-card">
+    <mat-card-header>
+        <div mat-card-avatar class="match-page-header-image"></div>
+        <mat-card-title>Create New Match</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form class="match-page-form">
+            <mat-form-field class="match-page-form">
+                <mat-label>Home Team</mat-label>
+                <mat-select [(value)]="match.home_team" [formControl]="homeTeamFormControl">
+                    <mat-option *ngFor="let t of teams" [value]="t.team_name">
+                        {{ t.team_name }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="homeTeamFormControl.hasError('required')">You must make a selection</mat-error>
+                <mat-error *ngIf="homeTeamFormControl.hasError('sameTeam')">Teams must be different</mat-error>
+
+
+            </mat-form-field>
+            <br>
+            <mat-form-field class="match-page-form">
+                <mat-label>Away Team</mat-label>
+                <mat-select [(value)]="match.away_team"[formControl]="awayTeamFormControl">
+                    <mat-option *ngFor="let t of teams" [value]="t.team_name">
+                        {{ t.team_name }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="awayTeamFormControl.hasError('required')">You must make a selection</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="match-page-form" >
+                <mat-label>Stadium</mat-label>
+                <mat-select [(value)]="match.stadium_id" [formControl]="stadiumFormControl">
+                    <mat-option *ngFor="let s of stadiums" [value]="s.id">
+                        {{ s.name }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="stadiumFormControl.hasError('required')">You must make a selection</mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="match-page-form">
+                <mat-label>Main Referee</mat-label>
+                <input matInput type="text" [formControl]="refereeFormControl" name="mainReferee" [(ngModel)]="match.main_refree">
+                <button mat-button *ngIf="match.main_refree" matSuffix mat-icon-button aria-label="Clear"
+                    (click)="match.main_refree=null">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <mat-error *ngIf="refereeFormControl.hasError('required')">
+                    Main Referee is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="match-page-form">
+                <mat-label>Linesman 1</mat-label>
+                <input matInput type="text" [formControl]="linesman1FormControl" name="linesman1" [(ngModel)]="match.linesman1">
+                <button mat-button *ngIf="match.linesman1" matSuffix mat-icon-button aria-label="Clear"
+                    (click)="match.linesman1=null">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <mat-error *ngIf="linesman1FormControl.hasError('required')">
+                    Linesman 1 is <strong>required</strong>
+                </mat-error>
+            </mat-form-field >
+            <br>
+            <mat-form-field class="match-page-form">
+                <mat-label>Linesman 2</mat-label>
+                <input matInput type="text" [formControl]="linesman2FormControl" name="linesman2" [(ngModel)]="match.linesman2">
+                <button mat-button *ngIf="match.linesman2" matSuffix mat-icon-button aria-label="Clear"
+                    (click)="match.linesman2=null">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <mat-error *ngIf="linesman2FormControl.hasError('required')">
+                    Linesman 2 is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="match-page-form">
+                <mat-label>Match Date</mat-label>
+                <input matInput [min]="minDate" type="datetime-local" [max]="maxDate" [formControl]="matchDateTimeFormControl" name="matchDateTime" [(ngModel)]="match.match_date_time">
+                <button mat-button *ngIf="match.match_date_time" matSuffix mat-icon-button aria-label="Clear"
+                    (click)="match.match_date_time=null">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <mat-error *ngIf="matchDateTimeFormControl.hasError('required')">
+                    Match Date is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="matchDateTimeFormControl.hasError('wrongDate')">
+                    Match Date should be within <strong>1 hour and 2 years from now</strong>
+                </mat-error>
+            </mat-form-field>
+
+</form>
+</mat-card-content>
+
+    <mat-card-actions>
+        <div class="match-button" *ngIf="homeTeamFormControl.hasError('required') || awayTeamFormControl.hasError('required') || stadiumFormControl.hasError('required')
+        || refereeFormControl.hasError('required') || linesman1FormControl.hasError('required') || linesman2FormControl.hasError('required')
+        || matchDateTimeFormControl.hasError('required') || matchDateTimeFormControl.hasError('wrongDate')">
+            <button disabled="true" mat-button (click)="createMatch()">Create Match</button>
+        </div>
+        <div class="match-button" *ngIf="!homeTeamFormControl.hasError('required') && !awayTeamFormControl.hasError('required') && !stadiumFormControl.hasError('required')
+        && !refereeFormControl.hasError('required')  && !linesman1FormControl.hasError('required') && !linesman2FormControl.hasError('required')
+        && !matchDateTimeFormControl.hasError('required')  && !matchDateTimeFormControl.hasError('wrongDate')">
+            <button mat-button (click)="createMatch()">Create Match</button>
+        </div>
+    </mat-card-actions>
+</mat-card>
+<br>
+<br>
+<br>
+<mat-card class="match-page-card">
+    <mat-card-header>
+        <div mat-card-avatar class="match-page-header-image"></div>
+        <mat-card-title>Edit Current Match</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form class="match-page-form">
+            <mat-form-field class="match-page-form">
+                <mat-label>Match ID</mat-label>
+                <mat-select [(value)]="selectedMatchId" [formControl]="selectedMatchIdFormControl" (selectionChange)="populateEditedMatch()">
+                    <mat-option *ngFor="let m of matches" [value]="m.match_id">
+                        {{ m.match_id }}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="selectedMatchIdFormControl.hasError('required')">You must make a selection</mat-error>
+            </mat-form-field>
+            <mat-form-field class="match-page-form">
+                <mat-label>Home Team</mat-label>
+                <mat-select [(value)]="matchEdited.home_team">
+                    <mat-option *ngFor="let t of teams" [value]="t.team_name">
+                        {{ t.team_name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="match-page-form">
+                <mat-label>Away Team</mat-label>
+                <mat-select [(value)]="matchEdited.away_team">
+                    <mat-option *ngFor="let t of teams" [value]="t.team_name">
+                        {{ t.team_name }}
+                    </mat-option>
+                </mat-select>
+
+            </mat-form-field>
+            <br>
+            <mat-form-field class="match-page-form">
+                <mat-label>Stadium</mat-label>
+                <mat-select [(value)]="matchEdited.stadium_id">
+                    <mat-option *ngFor="let s of stadiums" [value]="s.id">
+                        {{ s.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="match-page-form">
+                <mat-label>Main Referee</mat-label>
+                <input matInput type="text" [formControl]="editedRefereeFormControl" name="mainReferee" [(ngModel)]="matchEdited.main_refree">
+                <button mat-button *ngIf="matchEdited.main_refree" matSuffix mat-icon-button aria-label="Clear"
+                    (click)="matchEdited.main_refree=null">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <mat-error *ngIf="editedRefereeFormControl.hasError('required')">
+                    Main Referee is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="match-page-form">
+                <mat-label>Linesman 1</mat-label>
+                <input matInput type="text" [formControl]="editedLinesman1FormControl" name="linesman1" [(ngModel)]="matchEdited.linesman1">
+                <button mat-button *ngIf="matchEdited.linesman1" matSuffix mat-icon-button aria-label="Clear"
+                    (click)="matchEdited.linesman1=null">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <mat-error *ngIf="editedLinesman1FormControl.hasError('required')">
+                    Linesman 1 is <strong>required</strong>
+                </mat-error>
+            </mat-form-field >
+            <br>
+            <mat-form-field class="match-page-form">
+                <mat-label>Linesman 2</mat-label>
+                <input matInput type="text" [formControl]="editedLinesman2FormControl" name="linesman2" [(ngModel)]="matchEdited.linesman2">
+                <button mat-button *ngIf="matchEdited.linesman2" matSuffix mat-icon-button aria-label="Clear"
+                    (click)="matchEdited.linesman2=null">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <mat-error *ngIf="editedLinesman2FormControl.hasError('required')">
+                    Linesman 2 is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="match-page-form">
+                <mat-label>Match Date</mat-label>
+                <input matInput [min]="minDate" type="datetime-local" [max]="maxDate" [formControl]="editedMatchDateTimeFormControl" name="matchDateTime" [(ngModel)]="matchEdited.match_date_time">
+                <button mat-button *ngIf="matchEdited.match_date_time" matSuffix mat-icon-button aria-label="Clear"
+                    (click)="matchEdited.match_date_time=null">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <mat-error *ngIf="editedMatchDateTimeFormControl.hasError('required')">
+                    Match Date is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="editedMatchDateTimeFormControl.hasError('wrongDate')">
+                    Match Date should be within <strong>1 hour and 2 years from now</strong>
+                </mat-error>
+            </mat-form-field>
+
+</form>
+</mat-card-content>
+
+    <mat-card-actions>
+        <div class="match-button" *ngIf="!edited() || editedRefereeFormControl.hasError('required') || editedLinesman1FormControl.hasError('required') || editedLinesman2FormControl.hasError('required')
+        || editedMatchDateTimeFormControl.hasError('required') || editedMatchDateTimeFormControl.hasError('wrongDate')">
+            <button disabled="true" mat-button (click)="editMatch()">Edit Match</button>
+        </div>
+        <div class="match-button" *ngIf="edited()  && !editedRefereeFormControl.hasError('required')  && !editedLinesman1FormControl.hasError('required') && !editedLinesman2FormControl.hasError('required')
+        && !editedMatchDateTimeFormControl.hasError('required')  && !editedMatchDateTimeFormControl.hasError('wrongDate')">
+            <button mat-button (click)="editMatch()">Edit Match</button>
+        </div>
+    </mat-card-actions>
+</mat-card>
+<br>
+<br>

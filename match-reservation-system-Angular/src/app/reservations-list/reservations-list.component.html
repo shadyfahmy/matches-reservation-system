@@ -1,0 +1,5 @@
+<div id="mContainer">
+    <div id="res-container" *ngIf="reservations.length != 0">
+        <app-reservation-list-item *ngFor="let r of reservations" (init)="onInit($event)" [reservation] = r></app-reservation-list-item>
+    </div>
+</div>

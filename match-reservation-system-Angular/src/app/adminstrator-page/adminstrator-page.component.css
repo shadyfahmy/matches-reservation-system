@@ -1,0 +1,56 @@
+    div {
+    text-align: center;
+} 
+
+div button {
+    margin: 20px 10px;
+}
+
+div .card {
+    margin: auto;
+    width: 80%;
+    border: 3px solid rgb(0, 23, 128);
+    padding: 10px;
+    top: 10%;
+}
+
+div .card table {
+    display: inline-block;
+    text-align: left;
+    width:100%;
+    display:table;
+    table-layout: auto;
+    border: 3px solid rgb(0, 23, 128);
+}
+
+div .card table tr {
+    width: inherit;
+    border: 3px solid rgb(0, 23, 128);
+}
+
+div .card table tr th {
+    text-align: center;
+    border: 3px solid rgb(0, 23, 128);
+}
+
+div .card table tr td {
+    text-align: center;
+    border: 3px solid rgb(0, 23, 128);
+}
+
+div .card .del {
+    background: #ff0000;
+    color: #fff;
+    border: none;
+    padding: 5px 9px;
+    cursor: pointer;
+    margin:1px 0;
+}
+
+div .card .delL {
+    margin-right: 1px;
+}
+
+div .card .delR {
+    margin-left: 1px;
+}

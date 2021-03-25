@@ -1,0 +1,14 @@
+<mat-card id="item" [ngStyle]="{'background-color': !future() ? 'red' : nochange}">
+  <mat-card-title style="font-weight: bold; color:darkblue;">{{this.reservation.home_team}} vs {{this.reservation.away_team}}</mat-card-title>
+  <div style="font-weight: bold;">{{this.reservation.match_date_time}}</div>
+  <div><span style="font-weight: bold;">Ticket ID:</span> {{this.reservation.ticket_id}}</div>
+  <div><span style="font-weight: bold;">Seat Number:</span> {{this.reservation.seat_number}}</div>
+  <div><span style="font-weight: bold;">Stadium: </span> {{this.reservation.stadium_name}}</div>
+  <div><span style="font-weight: bold;">Refree: </span> {{this.reservation.main_refree}}</div>
+  <div><span style="font-weight: bold;">Lines Man 1:</span> {{this.reservation.linesman1}}</div>
+  <div><span style="font-weight: bold;">Lines Man 2:</span> {{this.reservation.linesman2}}</div>
+
+
+  <button (click)="cancelClick()" mat-raised-button color="primary"
+   style="margin-top: 20px;">Cancel Reservation</button>
+</mat-card>

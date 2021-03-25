@@ -1,0 +1,5 @@
+<div id="mainContainer">
+    <div id="matches-container" *ngIf="stadiums.length != 0 && matches.length != 0">
+        <app-match-list-item *ngFor="let m of matches" [match] = m [stadium] = "stadiums[m.stadium_id-1]"></app-match-list-item>
+    </div>
+</div>

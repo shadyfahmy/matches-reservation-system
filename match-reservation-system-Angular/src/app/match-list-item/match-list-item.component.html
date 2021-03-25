@@ -1,0 +1,29 @@
+<mat-card id="item" [ngStyle]="{'background-color': !future() ? 'red' : nochange}">
+    <mat-card-title style="font-weight: bold; color:darkblue;">{{this.match.home_team}} vs {{this.match.away_team}}</mat-card-title>
+    <div style="font-weight: bold;">{{this.match.match_date_time}}</div>
+    <div><span style="font-weight: bold;">Stadium: </span> {{this.stadium.name}}</div>
+    <div><span style="font-weight: bold;">Refree: </span> {{this.match.main_refree}}</div>
+    <div><span style="font-weight: bold;">Lines Man 1:</span> {{this.match.linesman1}}</div>
+    <div><span style="font-weight: bold;">Lines Man 2:</span> {{this.match.linesman2}}</div>
+
+    <button (click)="reserveClick()" mat-raised-button color="primary"
+     style="margin-top: 20px;">{{wantReserve? "Cancel" : "Show Seats"}}</button>
+    <button *ngIf="selected.length != 0" style="margin-left: 5px;"
+    (click)="confirmClick()"
+    mat-raised-button color="primary">Confirm</button>
+    <div style="margin: auto; text-align: center;" *ngIf="wantReserve">
+        <div *ngFor="let i of rows">
+          <button id="button{{i*this.stadium.seats_per_row+j}}"  *ngFor="let j of seatPerRow"
+           (click)="select(i*this.stadium.seats_per_row+j)" 
+           style="margin: 2px; width: 35px; text-align: center;"
+           [ngStyle]="{'background-color': reserved.includes(i*this.stadium.seats_per_row+j) ? 'red' :
+            selected.includes(i*this.stadium.seats_per_row+j) ? 'green' : nochange}">{{i*this.stadium.seats_per_row + j}}</button>
+        </div>
+        <div *ngIf="isGuest() && wantReserve && future()"> Login first to reserve seats </div>
+        <div *ngIf="confirm" style="margin-top: 10px;">
+            <input placeholder="Credit Card Number" type="text" [(ngModel)]="cardNum">
+            <input style="margin-left: 10px;" placeholder="PIN" type="text" [(ngModel)]="pin">
+            <button style="margin-left: 10px;" (click)="okClick()">OK</button>
+        </div>
+      </div>
+</mat-card>

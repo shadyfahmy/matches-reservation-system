@@ -1,0 +1,13 @@
+#res-container{
+    width: 85%;
+    margin-left: 160px;
+    margin-top: 30px;
+    z-index: -1; 
+
+}
+
+#mContainer{
+    margin-bottom: -20px;
+
+
+}
