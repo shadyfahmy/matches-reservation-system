@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActiveAccountService } from '../service/active-account.service'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-page',
@@ -8,10 +9,15 @@ import { ActiveAccountService } from '../service/active-account.service'
 })
 export class ProfilePageComponent implements OnInit {
   user_type: string;
-  constructor(private activeAccountService: ActiveAccountService) { }
+  constructor(private router:Router,
+    private activeAccountService: ActiveAccountService) { }
 
   ngOnInit() {
-    this.user_type = this.activeAccountService.getUser().user_type;
+    if(this.activeAccountService.isActive())
+      this.user_type = this.activeAccountService.getUser().user_type;
+    else
+      this.router.navigate(['/home']);
+      
   }
 
 }

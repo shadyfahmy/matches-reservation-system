@@ -1,7 +1,5 @@
 <div id="toolbar">
-  <mat-toolbar color="primary">
-      <div>Egyptian Premier League</div>
-    </mat-toolbar>
+  <app-epl-toolbar></app-epl-toolbar>
     <mat-tab-group color="primary">
       <mat-tab *ngIf="user_type == 'Admin'" label="Pending Users"> Pending Users </mat-tab>
       <mat-tab *ngIf="user_type == 'Admin'" label="Users List"> <app-adminstrator-page></app-adminstrator-page> </mat-tab>

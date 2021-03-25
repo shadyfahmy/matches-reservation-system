@@ -36,9 +36,6 @@ export class LoginPageComponent implements OnInit {
       });
     }
   }
-  signUp() {
-    this.router.navigate(['/signup']);
-  }
 
   openSnackBar(msg: string) {
     this._snackBar.open(msg, 'Okay', {

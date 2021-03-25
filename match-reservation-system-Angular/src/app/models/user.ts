@@ -8,6 +8,6 @@ export class User {
     gender: string; 
     mail: string;
     user_type: string;
-    address: string;
+    address: string = "";
     approved: number;
 }

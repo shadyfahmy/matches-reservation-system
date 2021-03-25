@@ -32,6 +32,7 @@ import { ReservationListItemComponent } from './reservation-list-item/reservatio
 import { AdminstratorPageComponent } from './adminstrator-page/adminstrator-page.component';
 import { MatchesPageComponent } from './matches-page/matches-page.component';
 import { CreateStadiumPageComponent } from './create-stadium-page/create-stadium-page.component';
+import { EplToolbarComponent } from './epl-toolbar/epl-toolbar.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { CreateStadiumPageComponent } from './create-stadium-page/create-stadium
     ReservationListItemComponent,
     AdminstratorPageComponent,
     MatchesPageComponent,
-    CreateStadiumPageComponent
+    CreateStadiumPageComponent,
+    EplToolbarComponent
   ],
   imports: [
     BrowserModule,
