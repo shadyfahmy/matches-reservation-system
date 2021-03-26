@@ -1,8 +1,7 @@
 <div id="toolbar">
   <app-epl-toolbar></app-epl-toolbar>
     <mat-tab-group color="primary">
-      <mat-tab *ngIf="user_type == 'Admin'" label="Pending Users"> Pending Users </mat-tab>
-      <mat-tab *ngIf="user_type == 'Admin'" label="Users List"> <app-adminstrator-page></app-adminstrator-page> </mat-tab>
+      <mat-tab *ngIf="user_type == 'Admin'" label="Users List and pending"> <app-adminstrator-page></app-adminstrator-page> </mat-tab>
       <mat-tab *ngIf="user_type == 'Manager'" label="Matches"> <app-matches-page></app-matches-page> </mat-tab>
       <mat-tab *ngIf="user_type == 'Manager'" label="Stadiums"> <app-create-stadium-page></app-create-stadium-page> </mat-tab>
       <mat-tab *ngIf="user_type == 'Fan'" label="Matches"> <app-matches-list></app-matches-list> </mat-tab>
