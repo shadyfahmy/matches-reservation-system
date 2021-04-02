@@ -72,7 +72,7 @@ public class TicketController {
                 + "match_reservation_system.match m, match_reservation_system.stadium s where"
                 + " t.username = '" + user_name
                 + "' and t.match_id = m.match_id "
-                + " and m.stadium_id = s.stadium_id";
+                + " and m.stadium_id = s.stadium_id order by m.match_date_time desc;";
         try {
             return jdbcTemplate.query(query,
                     new RowMapper<DetailedReservation>() {
