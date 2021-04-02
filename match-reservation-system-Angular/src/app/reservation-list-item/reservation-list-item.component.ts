@@ -36,11 +36,26 @@ export class ReservationListItemComponent implements OnInit {
     this.ticketsService.cancelReservation(this.reservation.seat_number, this.reservation.match_id).subscribe(()=>{
       this.openSnackBar("Reservation cancelled successfully");
       this.sendMsg();
+      this.reservation=null;
       //this.router.navigate(['/profile']);
     }, err => {
-      this.openSnackBar(err.error);
+      this.openSnackBar("Error cancelling reservation");
     })
   }
+
+  canCancel() {
+    if(this.calculateDiff(this.reservation.match_date_time) >= 3)
+      return true;
+    return false;
+  }
+
+  calculateDiff(sentDate) {
+    let date1:any = new Date(sentDate);
+    let date2:any = new Date();
+    let diffDays:any = Math.floor((date1 - date2) / (1000 * 60 * 60 * 24));
+    console.log(diffDays)
+    return diffDays;
+}
 
   openSnackBar(msg: string) {
     this._snackBar.open(msg, 'OK', {
