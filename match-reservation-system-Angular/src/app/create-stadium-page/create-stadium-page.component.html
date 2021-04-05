@@ -1,7 +1,3 @@
-<mat-toolbar color="primary">
-    <span>Egyptian Premier League</span>
-</mat-toolbar>
-
 <mat-card class="stadium-page-card">
     <mat-card-header>
         <div mat-card-avatar class="stadium-page-header-image"></div>
@@ -36,7 +32,7 @@
             <br>
             <mat-form-field class="stadium-page-form">
                 <mat-label>Number of Rows</mat-label>
-                <input matInput [min]="1" type="number" [max]="1000" [formControl]="noOfRowsFormControl" name="noOfRows" [(ngModel)]="stadium.number_of_rows">
+                <input matInput [min]="2" type="number" [max]="10" [formControl]="noOfRowsFormControl" name="noOfRows" [(ngModel)]="stadium.number_of_rows">
                 <button mat-button *ngIf="stadium.number_of_rows" matSuffix mat-icon-button aria-label="Clear"
                     (click)="stadium.number_of_rows=null">
                     <mat-icon>close</mat-icon>
@@ -45,16 +41,16 @@
                     Number of Rows is <strong>required</strong>
                 </mat-error>
                 <mat-error *ngIf="noOfRowsFormControl.hasError('max')">
-                    Max Number of Rows is <strong>1000</strong>
+                    Max Number of Rows is <strong>10</strong>
                 </mat-error>
                 <mat-error *ngIf="noOfRowsFormControl.hasError('min')">
-                    Min of Rows is <strong>1</strong>
+                    Min of Rows is <strong>2</strong>
                 </mat-error>
             </mat-form-field>
             <br>
             <mat-form-field class="stadium-page-form">
                 <mat-label>Seats per Row</mat-label>
-                <input matInput [min]="1" type="number" [max]="1000" [formControl]="seatsPerRowFormControl" name="seatsPerRow" [(ngModel)]="stadium.seats_per_row">
+                <input matInput [min]="4" type="number" [max]="15" [formControl]="seatsPerRowFormControl" name="seatsPerRow" [(ngModel)]="stadium.seats_per_row">
                 <button mat-button *ngIf="stadium.seats_per_row" matSuffix mat-icon-button aria-label="Clear"
                     (click)="stadium.seats_per_row=null">
                     <mat-icon>close</mat-icon>
@@ -63,10 +59,10 @@
                     Number of Rows is <strong>required</strong>
                 </mat-error>
                 <mat-error *ngIf="seatsPerRowFormControl.hasError('max')">
-                    Max Number of Rows is <strong>1000</strong>
+                    Max Number of Rows is <strong>15</strong>
                 </mat-error>
                 <mat-error *ngIf="seatsPerRowFormControl.hasError('min')">
-                    Min Number of Rows is <strong>1</strong>
+                    Min Number of Rows is <strong>4</strong>
                 </mat-error>
             </mat-form-field>
 

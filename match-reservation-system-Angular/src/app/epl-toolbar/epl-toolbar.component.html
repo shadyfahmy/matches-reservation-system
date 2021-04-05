@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
     <span>Egyptian Premier League</span>
     <span class="spacer"></span>
-    <a mat-icon-button href="/home">
+    <a mat-button href="/home">
         <mat-icon>home</mat-icon>
     </a>
     <div *ngIf="!loggedIn">
@@ -9,7 +9,8 @@
         <a mat-button href="/signup">Sign Up</a>
     </div>
     <div *ngIf="loggedIn">
-        <a mat-icon-button href="/profile">
+        <a mat-button href="/profile">
+            {{user.username}}
             <mat-icon>account_circle</mat-icon>
         </a>
         <button mat-icon-button (click)="logout()">

@@ -37,7 +37,7 @@
                 <td>{{user.address}}</td>
                 <td>{{user.mail}}</td>
                 <td>{{user.user_type}}</td>
-                <td><button (click)="accept(user)" class="del delL">accept</button><button (click)="reject(user)" class="del delR">reject</button></td>
+                <td><button (click)="accept(user)" class="del delL">accept</button><button (click)="onDeletePendingUser(user)" class="del">delete</button></td>
             </tr>
         </table>
     </div>

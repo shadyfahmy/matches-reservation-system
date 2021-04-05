@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActiveAccountService } from '../service/active-account.service'
 import { Router } from '@angular/router';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-epl-toolbar',
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
 export class EplToolbarComponent implements OnInit {
 
   public loggedIn: Boolean;
+  public user:User;
   constructor(private router:Router,
     public activeAccountService: ActiveAccountService) { }
 
@@ -19,6 +21,7 @@ export class EplToolbarComponent implements OnInit {
 
   initializePage() {
     this.loggedIn = this.activeAccountService.isActive();
+    this.user = this.activeAccountService.getUser();
     console.log(this.loggedIn);
   }
 

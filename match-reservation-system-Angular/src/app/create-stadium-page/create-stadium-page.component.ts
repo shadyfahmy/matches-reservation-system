@@ -38,13 +38,13 @@ export class CreateStadiumPageComponent implements OnInit {
   ]);
   noOfRowsFormControl = new FormControl('', [
     Validators.required,
-    Validators.min(1),
-    Validators.max(1000)
+    Validators.min(2),
+    Validators.max(10)
   ]);
   seatsPerRowFormControl = new FormControl('', [
     Validators.required,
-    Validators.min(1),
-    Validators.max(1000)
+    Validators.min(4),
+    Validators.max(15)
   ]);
   createStadium(){
     for (var s of this.stadiums)

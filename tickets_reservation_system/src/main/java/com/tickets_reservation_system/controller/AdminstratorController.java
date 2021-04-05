@@ -103,12 +103,6 @@ public class AdminstratorController {
     }
 
     @ResponseBody
-    @RequestMapping(method = RequestMethod.POST, value = "/reject")
-    public void reject(@RequestBody User user) {
-        //todo check the behaviour of this function.
-    }
-
-    @ResponseBody
     @RequestMapping(method = RequestMethod.DELETE, value = "/delete")
     public void delete(@RequestParam String username) {
         String query = "DELETE FROM user where username = '" + username + "'";

@@ -60,30 +60,6 @@ export class AdminstratorService {
       }), httpOptions);
   }
 
-  reject(user: User){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'authorization': this.activeAccountService.getToken()
-      })
-    }
-
-    return this.http.post(this.host + "/reject", JSON.stringify(
-      {
-        "fname": user.fname,
-        "lname": user.lname,
-        "dob": user.dob,
-        "username": user.username,
-        "gender": user.gender,
-        "mail": user.mail,
-        "pw": user.pw,
-        "user_type": user.user_type,
-        "address": user.address,
-        "city": user.city,
-        "approved": user.approved
-      }), httpOptions);
-  }
-
   delete(user: User){
     let httpParams = new HttpParams().set("username", user.username);
     const httpOptions = {

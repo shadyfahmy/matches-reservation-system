@@ -134,9 +134,8 @@ export class AdminstratorPageComponent implements OnInit {
     this.pendingUsers = this.pendingUsers.filter(u => u.username !== user.username);
   }
 
-  reject(user) {
-    this.adminstratorService.reject(user).subscribe();
-    //this.pendingUsers = this.pendingUsers.filter(u => u.username !== user.username);
+  onDeletePendingUser(user) {
+    this.adminstratorService.delete(user).subscribe();
+    this.pendingUsers = this.pendingUsers.filter(u => u.username !== user.username);
   }
-
 }
